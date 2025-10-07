@@ -1,0 +1,181 @@
+/* --- Header fijo --- */
+header {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  background: #fff;
+  padding: 10px;
+  border-bottom: 2px solid #ddd;
+}
+
+/* --- Layout principal --- */
+main {
+  display: grid;
+  grid-template-columns: 2fr 1fr; /* canciones grandes, favoritos más estrecho */
+  gap: 15px;
+  height: 100vh; /* que ocupe toda la ventana */
+  overflow: hidden; /* evita scroll general */
+  margin-top: 70px; /* espacio para el navbar */
+}
+
+/* --- Panel canciones --- */
+.songs {
+  height: 100vh;
+  overflow-y: auto; /* scroll interno */
+  padding-right: 5px;
+  box-sizing: border-box;
+}
+
+/* --- Panel favoritos --- */
+.favorites {
+  height: 100vh;
+  overflow-y: auto; /* scroll interno */
+  padding-right: 5px;
+  box-sizing: border-box;
+  border-left: 2px solid #ddd;
+}
+
+/* --- Rejilla de canciones --- */
+.songs .grid {
+  display: grid;
+  /*grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));*/
+  gap: 12px;
+}
+
+/* --- Rejilla de favoritos --- */
+.favorites .grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 10px;
+}
+
+/* --- Estilos de las cards --- */
+.card {
+  background: #fff;
+  border-radius: 8px;
+  padding: 10px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+.card img {
+  width: 100%;
+  border-radius: 6px;
+  margin-bottom: 8px;
+}
+
+/* Ajustar audio al ancho de la card */
+.card audio {
+  width: 100%;
+  margin-top: 6px;
+}
+
+/* --- Navbar fijo --- */
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 60px;
+  background-color: #222;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 20px;
+  z-index: 1000;
+}
+
+.navbar-brand {
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
+.navbar-links {
+  list-style: none;
+  display: flex;
+  gap: 15px;
+  margin: 0;
+  padding: 0;
+}
+
+.navbar-links li a {
+  color: white;
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.navbar-links li a:hover {
+  color: #ffcc00;
+}
+
+/* --- Paginación --- */
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  margin-top: 15px;
+}
+
+.pagination button {
+  background-color: #444;
+  color: white;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.pagination button:disabled {
+  background-color: #777;
+  cursor: not-allowed;
+}
+
+.pagination span {
+  font-size: 0.9rem;
+  color: #ddd;
+}
+
+/* --- Vista escritorio --- 
+@media (min-width: 900px) {
+  main {
+    grid-template-columns: 3fr 1fr; /* canciones más anchas 
+  }
+
+  .favorites .grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}*/
+
+@media (max-width: 600px) {
+  .songs .grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 601px) and (max-width: 1024px) {
+  .songs .grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (min-width: 1025px) {
+  .songs .grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+@media (min-width: 900px) {
+  main {
+    grid-template-columns: 1fr 220px; /* canciones flexibles + aside estrecho */
+  }
+
+  .favorites {
+    max-width: 280px; /* no se estira más de este ancho */
+  }
+
+  .favorites .grid {
+    grid-template-columns: 1fr; /* 1 columna en aside pequeño */
+  }
+}

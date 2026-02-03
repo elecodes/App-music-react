@@ -22,7 +22,7 @@ describe('SongsList', () => {
         const songs = [{ id: 1, title: 'S1', author: 'A1' }];
         render(<SongsList songs={songs} paginatedSongs={songs} favorites={[]} toggleFavorite={toggleFavorite} loading={false} />);
 
-        fireEvent.click(screen.getByText('🤍'));
+        fireEvent.click(screen.getByLabelText(/Add S1 to favorites/i));
         expect(toggleFavorite).toHaveBeenCalledWith(songs[0]);
     });
 
@@ -32,7 +32,7 @@ describe('SongsList', () => {
         const favorites = [{ id: 1, title: 'S1', author: 'A1' }];
         render(<SongsList songs={songs} paginatedSongs={songs} favorites={favorites} toggleFavorite={toggleFavorite} loading={false} />);
 
-        fireEvent.click(screen.getByText('❤️'));
+        fireEvent.click(screen.getByLabelText(/Remove S1 from favorites/i));
         expect(toggleFavorite).toHaveBeenCalledWith(songs[0]);
     });
 });

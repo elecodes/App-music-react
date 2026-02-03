@@ -28,7 +28,7 @@ export default function Favorites({
 
   return (
         <aside className="favorites">
-          <h2>⭐ Favorites</h2>
+          <h2>Favorites</h2>
           {favorites.length === 0 && <p>No favorites yet.</p>}
           <div className="grid">
             {favPaginated.map((song) => (
@@ -42,9 +42,8 @@ export default function Favorites({
                     className="btn-remove"
                     onClick={() => toggleFavorite(song)}
                     aria-label={`Remove ${song.title} from favorites`}
-                    style={{ marginTop: '10px' }}
                 >
-                  ❌ Remove
+                  Remove
                 </button>
               </div>
             ))}
@@ -57,7 +56,7 @@ export default function Favorites({
                 disabled={favPage === 1}
                 onClick={() => setFavPage(favPage - 1)}
               >
-                ⬅️ Previous
+                Previous
               </button>
               <span>
                 Page {favPage} of {totalPages}
@@ -66,7 +65,7 @@ export default function Favorites({
                 disabled={favPage === totalPages}
                 onClick={() => setFavPage(favPage + 1)}
               >
-                Next ➡️
+                Next
               </button>
             </div>
           )}

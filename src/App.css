@@ -1,20 +1,15 @@
-/* Variables Globales (Comunes) */
 :root {
   --brand-accent: #9D27FF;        /* Violeta principal */
   --brand-status: #A855F7;        /* Texto de estado */
   --success-play: #10B981;        /* Verde para éxito/reproducción */
   
-  /* Ambient Gradients for Moods (to be used via JS or classes) */
-  --gradient-calm: linear-gradient(135deg, #E0E7FF 0%, #F3E8FF 100%);
-  --gradient-energetic: linear-gradient(135deg, #FFF7ED 0%, #FEF3C7 100%);
-  --gradient-focus: linear-gradient(135deg, #F0FDFA 0%, #E0F2FE 100%);
-  --gradient-melancholic: linear-gradient(135deg, #FDF4FF 0%, #F5F3FF 100%);
+  /* Mood Gradients - Enhanced with logic from UI Pro Max */
+  --gradient-calm: linear-gradient(135deg, #E0E7FF 0%, #F5F3FF 100%);
+  --gradient-energetic: linear-gradient(135deg, #FFF7ED 0%, #F97316 100%);
+  --gradient-focus: linear-gradient(135deg, #F0FDFA 0%, #3B82F6 100%);
   
-  /* Mood Gradients Dark */
-  --gradient-calm-dark: linear-gradient(135deg, #1E1B4B 0%, #2E1065 100%);
-  --gradient-energetic-dark: linear-gradient(135deg, #451A03 0%, #422006 100%);
-  --gradient-focus-dark: linear-gradient(135deg, #022C22 0%, #082F49 100%);
-  --gradient-melancholic-dark: linear-gradient(135deg, #2E1065 0%, #4C1D95 100%);
+  /* Neon Accents for Dark Mode */
+  --neon-glow: 0 0 10px rgba(157, 39, 255, 0.4);
 }
 
 /* 1. Default (Light Mode) */
@@ -131,14 +126,18 @@ input:checked + .slider .icon-moon {
 }
 
 body {
+  font-family: 'Poppins', sans-serif;
   background: var(--bg-main);
   color: var(--text-primary);
-  transition: background 0.8s ease, color 0.3s ease; /* Smooth 0.8s transition */
-  font-weight: 400; /* Regular body */
+  transition: background 0.8s ease, color 0.3s ease;
+  font-weight: 400;
+  line-height: 1.6;
 }
 
 h1, h2, h3, h4, h5, h6 {
-  font-weight: 300; /* Light headers */
+  font-family: 'Righteous', cursive;
+  font-weight: 400;
+  letter-spacing: 0.02em;
 }
 
 /* --- Accessibility Utilities --- */
@@ -257,28 +256,26 @@ input:checked + .slider .icon-moon {
   transform: translateY(-50%) rotate(0deg);
 }
 
-/* --- Header fijo --- */
+/* --- Floating Header --- */
 header {
   position: sticky;
-  top: 0;
+  top: 16px;
+  margin: 0 16px;
   z-index: 1000;
-  background: var(--navbar-bg); /* Now uses specific header var */
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  padding: 1rem 2rem;
-  border-bottom: 2px solid var(--border-color);
+  background: var(--navbar-bg);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  padding: 0.75rem 2rem;
+  border: 1px solid var(--border-color);
+  border-radius: 16px;
   box-shadow: var(--shadow-sm);
-  transition: background-color 0.3s;
+  transition: all 0.3s ease;
   
-  /* Flexbox for centering */
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  
-  /* Background Image Control */
-  position: relative; /* Needed for absolute pseudo-element */
-  /* overflow: hidden;  REMOVED to allow dropdown to show */
+  position: relative;
 }
 
 /* Header Background Image */
@@ -424,7 +421,24 @@ main {
 }
 
 /* --- Estilos de las cards (Restored) --- */
+.card img {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  border-radius: 8px;
+  margin-bottom: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.card:hover img {
+  transform: scale(1.05); /* Zoom effect on image */
+}
+
 .card {
+  cursor: pointer;
+  /* Existing styles */
   background: var(--bg-card);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
@@ -437,19 +451,9 @@ main {
   transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.3s ease, background-color 0.3s ease;
 }
 
-.card:hover {
-  transform: translateY(-4px);
-  box-shadow: var(--shadow-hover);
-}
-
-.card img {
-  width: 100%;
-  height: auto;
-  aspect-ratio: 1 / 1;
-  object-fit: cover;
-  border-radius: 8px;
-  margin-bottom: 12px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+[data-theme='dark'] .card:hover {
+  box-shadow: var(--neon-glow), var(--shadow-hover);
+  border-color: var(--brand-accent);
 }
 
 
@@ -521,6 +525,40 @@ button:active {
 .btn-favorite.active {
   animation: heart-spring 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
   color: #EF4444; /* Red for active heart */
+}
+
+/* Rhythmic bounce for audio player */
+@keyframes rhythm-bounce {
+  0%, 100% { transform: scaleY(1); }
+  50% { transform: scaleY(1.1); }
+}
+
+audio:active, audio:focus {
+  animation: rhythm-bounce 0.8s ease-in-out infinite;
+}
+
+/* Button & Link styles */
+.pagination button, .btn-remove {
+  font-family: inherit;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-size: 0.8rem;
+  border: 2px solid var(--border-color) !important;
+  padding: 10px 18px !important;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.btn-remove {
+  background: transparent;
+  color: #EF4444;
+  border-color: rgba(239, 68, 68, 0.2) !important;
+}
+
+.btn-remove:hover {
+  background: #EF4444;
+  color: white;
+  border-color: #EF4444 !important;
 }
 
 /* --- Search Bar (Restored) --- */
@@ -796,33 +834,86 @@ button:active {
   color: #0F172A;
 }
 
-/* --- Auth Trigger Button (Refined) --- */
+/* --- Auth Trigger --- */
 .auth-trigger-btn {
-  padding: 0.6rem 1.25rem;
-  font-size: 1rem;
+  padding: 12px 24px;
+  background: var(--bg-surface);
+  border: 1px solid var(--border-color);
+  border-radius: 30px;
+  color: var(--text-primary);
   font-weight: 600;
-  border-radius: 8px;
-  border: none;
   cursor: pointer;
-  background: linear-gradient(135deg, var(--brand-accent) 0%, #7C3AED 100%);
-  color: white;
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  letter-spacing: 0.025em;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
+  transition: all 0.3s ease;
+  box-shadow: var(--shadow-sm);
+  font-family: inherit;
 }
 
 .auth-trigger-btn:hover {
+  border-color: var(--brand-accent);
+  box-shadow: var(--shadow-hover);
   transform: translateY(-2px);
-  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
-  filter: brightness(1.1);
 }
 
-.auth-trigger-btn:active {
-  transform: translateY(0);
+/* --- Overlay Close --- */
+.btn-close-overlay {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: white;
+  padding: 8px 20px;
+  border-radius: 20px;
+  cursor: pointer;
+  backdrop-filter: blur(8px);
+  font-weight: 600;
+  transition: all 0.2s ease;
+}
+
+.btn-close-overlay:hover {
+  background: rgba(255, 255, 255, 0.2);
+  transform: scale(1.05);
+}
+
+/* --- Footer --- */
+.app-footer {
+  text-align: center;
+  padding: 3rem 1rem;
+  margin-top: 4rem;
+  border-top: 1px solid var(--border-color);
+  opacity: 0.7;
+}
+
+.app-footer p {
+  font-size: 0.9rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+/* --- Global Background Pulse --- */
+.app {
+  min-height: 100vh;
+  transition: background 1.2s ease-in-out;
+  position: relative;
+}
+
+.app::after {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle at 50% 50%, var(--brand-accent) 0%, transparent 60%);
+  opacity: 0.03;
+  pointer-events: none;
+  z-index: -1;
+  animation: bg-pulse 10s ease-in-out infinite alternate;
+}
+
+@keyframes bg-pulse {
+  from { opacity: 0.02; transform: scale(1); }
+  to { opacity: 0.05; transform: scale(1.2); }
 }
 
 /* Auth Modal Overlay */

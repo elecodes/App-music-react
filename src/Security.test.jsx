@@ -23,7 +23,7 @@ describe('Security & Input Sanitization', () => {
 
     render(<App />);
     const input = await screen.findByPlaceholderText(/Search artists or songs.../i); // Async wait for Header
-    const button = screen.getByRole('button', { name: /Search/i });
+    const button = screen.getByRole('button', { name: /Discover/i });
 
     fireEvent.change(input, { target: { value: longInput } });
     fireEvent.click(button);
@@ -48,7 +48,7 @@ describe('Security & Input Sanitization', () => {
 
     render(<App />);
     const input = await screen.findByPlaceholderText(/Search artists or songs.../i); // Async wait for Header
-    const button = screen.getByRole('button', { name: /Search/i });
+    const button = screen.getByRole('button', { name: /Discover/i });
 
     fireEvent.change(input, { target: { value: maliciousInput } });
     fireEvent.click(button);

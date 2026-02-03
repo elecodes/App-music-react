@@ -25,7 +25,7 @@ describe('App Component', () => {
         await waitFor(() => {
             expect(screen.getByRole('heading', { level: 1, name: /MoodTunes/i })).toBeInTheDocument();
         });
-        expect(screen.getByText(/@2025 MoodTunes by Elecodes/i)).toBeInTheDocument();
+        expect(screen.getByText(/MoodTunes by @elecodes/i)).toBeInTheDocument();
         expect(screen.getByRole('checkbox')).toBeInTheDocument(); 
     });
 
@@ -45,7 +45,7 @@ describe('App Component', () => {
             const input = await screen.findByPlaceholderText(/Search artists or songs/i);
             fireEvent.change(input, { target: { value: 'Query' } });
             // Use precise name to avoid matching "Clear search"
-            fireEvent.click(screen.getByRole('button', { name: /Search Music/i }));
+            fireEvent.click(screen.getByRole('button', { name: /Discover/i }));
 
             await waitFor(() => {
                 expect(screen.getByText('Song A')).toBeInTheDocument();
@@ -57,7 +57,7 @@ describe('App Component', () => {
             global.fetch.mockResolvedValueOnce({ json: async () => ({ results: [] }), ok: true });
             render(<App />);
             fireEvent.change(screen.getByPlaceholderText(/Search/i), { target: { value: 'None' } });
-            fireEvent.click(screen.getByRole('button', { name: /Search Music/i }));
+            fireEvent.click(screen.getByRole('button', { name: /Discover/i }));
             
             await waitFor(() => {
                 expect(screen.getByText(/No results found/i)).toBeInTheDocument();
@@ -152,7 +152,7 @@ describe('App Component', () => {
             render(<App />);
             fireEvent.change(screen.getByPlaceholderText(/Search/i), { target: { value: 'F' } });
             // fireEvent.keyDown(screen.getByPlaceholderText(/Search/i), { key: 'Enter', code: 'Enter' });
-            fireEvent.click(screen.getByRole('button', { name: /Search Music/i }));
+            fireEvent.click(screen.getByRole('button', { name: /Discover/i }));
 
             await waitFor(() => expect(screen.getByText('FaveMe')).toBeInTheDocument());
 
@@ -183,7 +183,7 @@ describe('App Component', () => {
             
             render(<App />);
             fireEvent.change(screen.getByPlaceholderText(/Search/i), { target: { value: 'Lots' } });
-            fireEvent.click(screen.getByRole('button', { name: /Search Music/i }));
+            fireEvent.click(screen.getByRole('button', { name: /Discover/i }));
 
             await waitFor(() => expect(screen.getByText('Song 0')).toBeInTheDocument());
             expect(screen.queryByText('Song 14')).not.toBeInTheDocument(); // Page 1 has 12 items (0-11)

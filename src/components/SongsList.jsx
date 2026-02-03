@@ -66,7 +66,11 @@ export default function SongsList({
                           padding: '5px'
                         }}
                       >
-                        {isFav ? "❤️" : "🤍"}
+                        {isFav ? (
+                          <svg width="24" height="24" viewBox="0 0 24 24" fill="#EF4444" stroke="#EF4444" strokeWidth="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
+                        ) : (
+                          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
+                        )}
                       </button>
                     </div>
                   );
@@ -80,7 +84,7 @@ export default function SongsList({
           {songs.length > perPage && (
             <div className="pagination">
               <button disabled={page === 1} onClick={() => setPage(page - 1)}>
-                ⬅️ Previous
+                Previous
               </button>
               <span>
                 Page {page} of {Math.ceil(songs.length / perPage)}
@@ -89,7 +93,7 @@ export default function SongsList({
                 disabled={page === Math.ceil(songs.length / perPage)}
                 onClick={() => setPage(page + 1)}
               >
-                Next ➡️
+                Next
               </button>
             </div>
           )}

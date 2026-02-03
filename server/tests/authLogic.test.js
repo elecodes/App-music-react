@@ -61,7 +61,7 @@ describe('Backend Security: Auth Controller', () => {
     // This depends on Zod configuration. By default safeParse ignores extras, 
     // but the controller explicitly destructures only known fields.
     const req = mockReq({ 
-        email: 'test@example.com', 
+        email: 'sanitize-test@example.com',  
         password: 'SecurePassword123!', 
         username: 'validUser',
         isAdmin: true // Malicious injection attempt

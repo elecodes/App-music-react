@@ -339,14 +339,10 @@ export default function App() {
                          {/* Optional Back Button within overlay context if needed, or click outside to close */}
                          <button 
                             onClick={() => setShowAuth(false)}
-                            style={{ 
-                                position: 'absolute', top: '20px', right: '20px', 
-                                background: 'rgba(255,255,255,0.2)', border: 'none', 
-                                color: 'white', padding: '8px 16px', borderRadius: '20px',
-                                cursor: 'pointer', backdropFilter: 'blur(4px)'
-                            }}
+                            className="btn-close-overlay"
+                            aria-label="Close authentication window"
                          >
-                            ✕ Close
+                            Close
                          </button>
                          <AuthForm onSubmit={(userData) => {
                              console.log("Auth Success:", userData);
@@ -413,8 +409,8 @@ export default function App() {
           </div>
       )}
 
-      <footer style={{ textAlign: "center", padding: "1rem", marginTop: "2rem" }}>
-        <p>@2025 MoodTunes by Elecodes</p>
+      <footer className="app-footer">
+        <p>&copy; {new Date().getFullYear()} MoodTunes by @elecodes</p>
       </footer>
     </div>
   );

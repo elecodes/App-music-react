@@ -3,7 +3,19 @@ import userEvent from '@testing-library/user-event';
 import { describe, it, expect, vi } from 'vitest';
 import AuthForm from './AuthForm';
 
+// Mock authService to avoid network calls
+vi.mock('../../services/authService.js', () => ({
+  authService: {
+    register: vi.fn(),
+    login: vi.fn()
+  }
+}));
+
+import { authService } from '../../services/authService.js';
+
 describe('AuthForm Component', () => {
+  // ... existing tests ...
+
   it('renders correctly with initial state', () => {
     render(<AuthForm />);
     
@@ -93,12 +105,14 @@ describe('AuthForm Component', () => {
 
   it('shows loading state and disables button during submission', async () => {
     const user = userEvent.setup();
-    // Mock submit that takes time
-    const handleSubmit = vi.fn(() => new Promise(resolve => setTimeout(resolve, 500)));
+    // Mock successful API response with delay to check loading state
+    authService.register.mockImplementation(() => new Promise(resolve => setTimeout(() => resolve({ data: { id: '123' } }), 100)));
+    
+    const handleSubmit = vi.fn();
     render(<AuthForm onSubmit={handleSubmit} />);
     
     await user.type(screen.getByLabelText('Correo Electrónico'), 'test@example.com');
-    await user.type(screen.getByLabelText('Contraseña', { selector: 'input' }), 'password123');
+    await user.type(screen.getByLabelText('Contraseña', { selector: 'input' }), 'Password123!');
     
     const submitButton = screen.getByRole('button', { name: /crear cuenta/i });
     await user.click(submitButton);
@@ -107,7 +121,8 @@ describe('AuthForm Component', () => {
     expect(submitButton).toHaveTextContent(/procesando/i);
     
     await waitFor(() => {
+        expect(authService.register).toHaveBeenCalled();
         expect(handleSubmit).toHaveBeenCalled();
-    }, { timeout: 3000 });
+    });
   });
 });

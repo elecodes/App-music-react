@@ -90,6 +90,14 @@ This project uses **Vitest** and **React Testing Library** for unit and integrat
 -   **Dependency Audits**: Regular `npm audit` checks are performed (Current: 0 vulnerabilities).
 -   **Linting**: 100% clean linting status enforced via ESLint with strict environment configurations.
 
+## Screenshots
+
+### 🔍 App Search
+![App Search Results](e2e-screenshots/search-results.png)
+
+### ⭐ Favorites Management
+![Favorites Feature](e2e-screenshots/favorites-usage.png)
+
 ## License
 
 MIT

@@ -98,6 +98,13 @@ This project uses **Vitest** and **React Testing Library** for unit and integrat
 ### ⭐ Favorites Management
 ![Favorites Feature](e2e-screenshots/favorites-usage.png)
 
+### 🌙 Dark Mode
+![Dark Mode View](e2e-screenshots/dark-mode.png)
+
+## Demo Video
+See the app in action:
+![MoodTunes Demo Video](e2e-screenshots/demo.webm)
+
 ## License
 
 MIT

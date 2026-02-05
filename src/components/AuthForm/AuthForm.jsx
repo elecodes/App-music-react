@@ -1,4 +1,4 @@
-import { useState, useRef } from 'react';
+import { useState } from 'react';
 import styles from './AuthForm.module.css';
 import { authService } from '../../services/authService.js';
 
@@ -25,10 +25,6 @@ export default function AuthForm({ onSubmit }) {
 
   const [showPassword, setShowPassword] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [touched, setTouched] = useState({
-    email: false,
-    password: false
-  });
 
   // Unique IDs for accessibility
   const emailId = "auth-email";
@@ -67,8 +63,6 @@ export default function AuthForm({ onSubmit }) {
 
   const handleBlur = (e) => {
     const { name, value } = e.target;
-    setTouched(prev => ({ ...prev, [name]: true }));
-    
     // Validate on blur to avoid interrupting user while typing
     const error = validateField(name, value);
     if (error) {
@@ -93,7 +87,6 @@ export default function AuthForm({ onSubmit }) {
         email: emailError,
         password: passwordError
       });
-      setTouched({ email: true, password: true });
       return;
     }
 

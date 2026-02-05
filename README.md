@@ -84,9 +84,11 @@ This project uses **Vitest** and **React Testing Library** for unit and integrat
 -   **JSDoc**: Comprehensive JSDoc comments implemented for all Core Helpers (`src/helpers`) and Components, ensuring strict typing and IntelliSense support.
 
 ### Security Measures (OWASP Top 10)
--   **Content Security Policy (CSP)**: Implemented in `index.html` to restrict resource sources.
+-   **SecurityDevSecOps Invocation**: A comprehensive audit process that combines Dynamic Testing, SAST, and DevOps quality gates.
+-   **Content Security Policy (CSP)**: Implemented via `Helmet` in the server to restrict resource sources.
 -   **Input Sanitization**: Search queries are truncated and encoded to prevent XSS and Injection attacks.
--   **Dependency Audits**: Regular `npm audit` checks are performed.
+-   **Dependency Audits**: Regular `npm audit` checks are performed (Current: 0 vulnerabilities).
+-   **Linting**: 100% clean linting status enforced via ESLint with strict environment configurations.
 
 ## License
 

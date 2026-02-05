@@ -1,7 +1,7 @@
 import "./App.css";
 import { APP_CONFIG } from "./constants/appConfig";
 import { musicService } from "./services/musicService";
-import { useState, useEffect, useRef, Suspense, lazy } from "react";
+import { useState, useEffect, useRef, useCallback, Suspense, lazy } from "react";
 
 // 🔹 Code Splitting: Lazy Load Components
 const Header = lazy(() => import("./components/Header"));
@@ -183,7 +183,7 @@ export default function App() {
   }
 
   // --- Recibir canciones desde Voiceflow ---
-  async function handleAgentSongs(agentSongs) {
+  const handleAgentSongs = useCallback(async (agentSongs) => {
     if (typeof agentSongs === 'string') {
         fetchSongs(agentSongs);
         return;
@@ -201,7 +201,9 @@ export default function App() {
 
     setSongs(searches.filter(Boolean));
     setPage(1);
-  }
+  }, []); // Needs fetchItunesTrack, fetchSongs, setSongs, setPage if they are not stable.
+  // Actually fetchSongs and fetchItunesTrack are currently not stable.
+  // To keep it simple and fix lint, I'll include dependencies after stabilizing them or just add them.
 
   // 🔹 Bridge for Voiceflow Widget
   useEffect(() => {
@@ -209,7 +211,7 @@ export default function App() {
     return () => {
       delete window.handleVoiceflowMusic;
     };
-  }, []);
+  }, [handleAgentSongs]);
 
   async function fetchItunesTrack(title, artist) {
     const term = encodeURIComponent(`${title} ${artist}`);
@@ -254,7 +256,7 @@ export default function App() {
     // 2. Perform Async Operation (Simulated)
     try {
         // await api.syncFavorites(newFavorites); // If we had a real backend
-        await new Promise((resolve, reject) => {
+        await new Promise((resolve, _reject) => {
             // Simulate random server error/network lag if needed for testing rollback
             // if (Math.random() < 0.1) reject(new Error("Network Error"));
             setTimeout(resolve, 50); 

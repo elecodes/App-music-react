@@ -90,20 +90,23 @@ This project uses **Vitest** and **React Testing Library** for unit and integrat
 -   **Dependency Audits**: Regular `npm audit` checks are performed (Current: 0 vulnerabilities).
 -   **Linting**: 100% clean linting status enforced via ESLint with strict environment configurations.
 
+
 ## Screenshots
 
 ### 🔍 App Search
-![App Search Results](e2e-screenshots/search-results.png)
+<img src="e2e-screenshots/search-results.png" width="600" alt="App Search Results">
 
 ### ⭐ Favorites Management
-![Favorites Feature](e2e-screenshots/favorites-usage.png)
+<img src="e2e-screenshots/favorites-usage.png" width="600" alt="Favorites Feature">
 
 ### 🌙 Dark Mode
-![Dark Mode View](e2e-screenshots/dark-mode.png)
+<img src="e2e-screenshots/dark-mode.png" width="600" alt="Dark Mode View">
 
 ## Demo Video
 See the app in action:
-![MoodTunes Demo Video](e2e-screenshots/demo.webm)
+  <video src="https://github.com/user-attachments/assets/98f73e5c-92b0-43bf-b3eb-53cde9744ced"
+   MoodTunes Demo
+</video>
 
 ## License
 

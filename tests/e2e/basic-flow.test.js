@@ -10,6 +10,7 @@ test.describe('MoodTunes Basic Flow', () => {
     // Search for a song
     const searchInput = page.locator('input[placeholder*="Search"]');
     await searchInput.fill('Coldplay');
+    await page.keyboard.press('Escape');
     await searchInput.press('Enter');
     
     // Check results
@@ -26,6 +27,7 @@ test.describe('MoodTunes Basic Flow', () => {
     // Search for a song to ensure we have results
     const searchInput = page.locator('input[placeholder*="Search"]');
     await searchInput.fill('Imagine Dragons');
+    await page.keyboard.press('Escape');
     await searchInput.press('Enter');
     
     // Find the first "Add to Favorites" button (using a more specific selector if possible)
